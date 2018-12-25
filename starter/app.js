@@ -1,4 +1,36 @@
-const budgetController = (function() {})();
+const budgetController = (function() {
+  const Expense = function(id, description, value) {
+    this.id = id;
+    this.description = description;
+    this.value = value;
+  };
+  const Income = function(id, description, value) {
+    this.id = id;
+    this.description = description;
+    this.value = value;
+  };
+
+  let data = {
+    allItems: {
+      expense: [],
+      income: []
+    },
+    total: {
+      expense: 0,
+      income: 0
+    }
+  };
+  return {
+    addItem: function(type, description, value) {
+      let newItem;
+      if (type === "expense") {
+        newItem = new Expense(ID, description, value);
+      } else if (type === "income") {
+        newItem = new Income(ID, description, value);
+      }
+    }
+  };
+})();
 
 const UIController = (function() {
   const DOMstrings = {
