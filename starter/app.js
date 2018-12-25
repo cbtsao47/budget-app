@@ -1,7 +1,7 @@
-let budgetController = (function() {})();
+const budgetController = (function() {})();
 
-let UIController = (function() {
-  let DOMstrings = {
+const UIController = (function() {
+  const DOMstrings = {
     inputType: ".add__type",
     inputDescription: ".add__description",
     inputValue: ".add__value",
@@ -21,18 +21,29 @@ let UIController = (function() {
   };
 })();
 
-let controller = (function(budgetController, UIController) {
-  let DOM = UIController.getDOMstrings();
-  let controlAddItem = function() {
-    let input = UIController.getInput();
+const controller = (function(budgetController, UIController) {
+  const setupEventListeners = function() {
+    const DOM = UIController.getDOMstrings();
+    document
+      .querySelector(DOM.inputBtn)
+      .addEventListener("click", controlAddItem);
+    document.addEventListener("keypress", function(e) {
+      if (e.key === "Enter") {
+        controlAddItem();
+      }
+    });
+  };
+
+  const controlAddItem = function() {
+    const input = UIController.getInput();
     console.log(input);
   };
-  document
-    .querySelector(DOM.inputBtn)
-    .addEventListener("click", controlAddItem);
-  document.addEventListener("keypress", function(e) {
-    if (e.key === "Enter") {
-      controlAddItem();
+
+  return {
+    init: function() {
+      setupEventListeners();
     }
-  });
+  };
 })(budgetController, UIController);
+
+controller.init();
